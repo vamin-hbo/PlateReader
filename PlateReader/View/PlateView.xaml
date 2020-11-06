@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="PlateReader.View.PlateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:helper ="clr-namespace:PlateReader.Helper"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="elementBackGroundColorStyle" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <Trigger Property="Text" Value="L">
+                    <Setter Property="Background" Value="LightGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter"></BooleanToVisibilityConverter>
+    </UserControl.Resources>
+    <Grid>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding WellsCollection, Mode=OneWay }">
+            <DataGrid.Resources>
+                <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                
+                <!--First Set of Columns for Both 48 and 96 Wells-->
+                <DataGridTextColumn Header="" Binding="{Binding RowHeader}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+                <DataGridTextColumn Header="1" Binding="{Binding ColumnOne}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+                <DataGridTextColumn Header="2" Binding="{Binding ColumnTwo}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+                <DataGridTextColumn Header="3" Binding="{Binding ColumnThree}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+                <DataGridTextColumn Header="4" Binding="{Binding ColumnFour}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+                <DataGridTextColumn Header="5" Binding="{Binding ColumnFive}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+                <DataGridTextColumn Header="6" Binding="{Binding ColumnSix}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+                
+                <!--Second Set of Columns for Extended Wells-->
+                <DataGridTextColumn Header="7" Binding="{Binding ColumnSeven}" Visibility="{Binding Data.IsExtendedGrid,Converter={StaticResource boolToVisibilityConverter},Source={StaticResource proxy}}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+                <DataGridTextColumn Header="8" Binding="{Binding ColumnEight}" Visibility="{Binding Data.IsExtendedGrid,Converter={StaticResource boolToVisibilityConverter},Source={StaticResource proxy}}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+                <DataGridTextColumn Header="9" Binding="{Binding ColumnNine}" Visibility="{Binding Data.IsExtendedGrid,Converter={StaticResource boolToVisibilityConverter},Source={StaticResource proxy}}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+                <DataGridTextColumn Header="10" Binding="{Binding ColumnTen}" Visibility="{Binding Data.IsExtendedGrid,Converter={StaticResource boolToVisibilityConverter},Source={StaticResource proxy}}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+                <DataGridTextColumn Header="11" Binding="{Binding ColumnEleven}" Visibility="{Binding Data.IsExtendedGrid,Converter={StaticResource boolToVisibilityConverter},Source={StaticResource proxy}}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+                <DataGridTextColumn Header="12" Binding="{Binding ColumnTwelve}" Visibility="{Binding Data.IsExtendedGrid,Converter={StaticResource boolToVisibilityConverter},Source={StaticResource proxy}}" ElementStyle="{StaticResource elementBackGroundColorStyle}"/>
+
+            </DataGrid.Columns>
+            
+        </DataGrid>
+    </Grid>
+</UserControl>
